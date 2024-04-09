@@ -1,57 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Housing Management Dashboard</title>
-  <link rel="stylesheet" href="dash.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housing Management Dashboard</title>
+    <link rel="stylesheet" href="dash.css">
 </head>
+
 <body>
-  <h1>Housing Management Dashboard</h1>
+    <header>
+        <nav class="navbar"> <a href="#" class="homeowner-name">Homeowner Name</a>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="facilities.html">Facility Booking</a></li>
+            </ul>
+        </nav>
 
-  <div class="grid-container">
-    <div class="card events">
-      <h2>Events</h2>
-      <p>Upcoming Event: Movie Night by the Pool (Friday, April 26th, 7:00 PM)</p>
-      <a href="#">Learn More</a>
-    </div>
-    <div class="card facility-booking">
-      <h2>Facility Booking</h2>
-      <template id="bookedTemplate">
-        <p>Facility booked: {{ facility }} on {{ date }}</p>
-      </template>
-      <p id="booked-facilities"></p>
-      <a href="facilities.html" class="book-button">Book</a>
-    </div>
-    <div class="card circulars">
-      <h2>Circulars</h2>
-      <p>No new circulars</p>
-    </div>
-    <div class="card noticeboard">
-      <h2>Noticeboard</h2>
-      <div class="notice">
-        <h3>Water Maintenance (April 15th)</h3>
-        <p>There will be a scheduled water maintenance on April 15th from 9:00 AM to 5:00 PM. During this time, there will be no water supply in the apartments.</p>
-      </div>
-      </div>
-  </div>
+        <h1>Housing Management Dashboard</h1>
 
-  <script>
-    const bookedFacilities = { // Replace with actual data from your system
-      facility: "Swimming Pool",
-      date: "Saturday, April 20th, 2:00 PM - 4:00 PM"
-    };
+        <div class="grid-container">
+            <div class="card events">
+                <h2>Events</h2>
+                <template id="eventTemplate">
+                    <h3>{{ title }}</h3>
+                    <p>{{ date }}</p>
+                    <p>{{ description }}</p>
+                </template>
+                <div id="event-list"></div>
+                <a href="#">View All Events</a>
+                <div class="mini-card-container">
+                    <h2>Upcoming Bookings</h2>
+                    <template id="bookedEventTemplate">
+                        <p>**{{ title }}** - {{ date }}</p>
+                    </template>
+                    <div id="booked-events"></div>
+                </div>
+            </div>
+            <div class="card facility-booking">
+                <h2>Facility Booking</h2>
+                <template id="bookedTemplate">
+                    <p>Facility booked: {{ facility }} on {{ date }}</p>
+                </template>
+                <p id="booked-facilities"></p>
+                <a href="facilities.html" class="book-button">Book</a>
+            </div>
+            <div class="card circulars">
+                <h2>Circulars</h2>
+                <p>No new circulars</p>
+            </div>
+            <div class="card noticeboard">
+                <h2>Noticeboard</h2>
+                <div class="notice">
+                    <h3>Water Maintenance (April 15th)</h3>
+                    <p>There will be a scheduled water maintenance on April 15th from 9:00 AM to 5:00 PM. During this
+                        time, there will be no water supply in the apartments.</p>
+                </div>
+            </div>
+        </div>
 
-    const bookedTemplate = document.getElementById('bookedTemplate');
-    const bookedFacilitiesElement = document.getElementById('booked-facilities');
+        <script>
+            // Replace with actual data from your system (array of events objects)
+            const events = [
+                { title: "Movie Night by the Pool", date: "Friday, April 26th, 7:00 PM", description: "Bring your blankets and snacks for a fun night under the stars!" },
+                // Add more events here
+            ];
 
-    if (bookedFacilities) {
-      const clone = bookedTemplate.content.cloneNode(true);
-      clone.querySelector('p').textContent = `Facility booked: ${bookedFacilities.facility} on ${bookedFacilities.date}`;
-      bookedFacilitiesElement.appendChild(clone);
-    } else {
-      bookedFacilitiesElement.textContent = 'No facilities booked';
-    }
-  </script>
+            const bookedFacilities = { // Replace with actual data from your system
+                facility: "Swimming Pool",
+                date: "Saturday, April 20th, 2:00 PM - 4:00 PM"
+            };
+
+            const bookedTemplate = document.getElementById('bookedTemplate');
+            const bookedFacilitiesElement = document.getElementById('booked-facilities');
+            const eventListElement = document.getElementById('event-list');
+            const bookedEventsElement = document.getElementById('booked-events');
+
+            if (bookedFacilities) {
+                const clone = bookedTemplate.content.cloneNode(true);
+                clone.querySelector('p').textContent = `Facility booked: ${bookedFacilities.facility} on ${bookedFacilities.date}`;
+                bookedFacilitiesElement.appendChild(clone);
+            } else {
+                bookedFacilitiesElement.textContent = 'No facilities booked';
+            }
+
+            function populateEvents() {
+                events.forEach(event => {
+                    const eventClone = document.getElementById('eventTemplate').content.cloneNode(true);
+                    eventClone.querySelector('h3').textContent = event.title;
+                    eventClone.querySelector('p:nth-child(2)').textContent = event.date;
+                    eventClone.querySelector('p:nth-child(3)').textContent = event.description;
+                    eventListElement.appendChild(eventClone);
+
+                    // Check for upcoming bookings within the event
+                    if (event.bookings) { // Replace with logic to check for bookings within event
+                        const bookingContainer = document.createElement('div');
+                        bookingContainer.classList.add('mini-card');
+                        bookingContainer.
+                        const bookingContainer = document.createElement('div');
+                        bookingContainer.classList.add('mini-card');
+                        bookingContainer.innerHTML = `<h2>Upcoming Bookings</h2>`;
+
+                        event.bookings.forEach(booking => { // Replace with actual bookings data
+                            const bookedEventClone = document.getElementById('bookedEventTemplate').content.cloneNode(true);
+                            bookedEventClone.querySelector('p').textContent = `${booking.title} - ${booking.date}`;
+                            bookingContainer.appendChild(bookedEventClone);
+                        });
+
+                        eventClone.querySelector('.mini-card-container').appendChild(bookingContainer);
+                    });
+            }
+
+            populateEvents();
+        </script>
 </body>
+
 </html>
