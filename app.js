@@ -2,51 +2,38 @@ const express = require('express');
 const mysql = require('mysql2');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// MySQL Connection
+// MySQL connection configuration
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'admin',
     password: 'root',
-    database: 'housing_management' // Replace 'your_database' with your actual database name
+    database: 'housing_management'
 });
 
-// Connect to MySQL
-connection.connect(err => {
-    if (err) {
-        console.error('Error connecting to MySQL:', err);
-        return;
-    }
-    console.log('Connected to MySQL database.');
-});
-
-// Middleware to parse request body
+// Middleware to parse JSON and urlencoded form data
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve facilities.html
-app.get('/facilities.html', (req, res) => {
-    res.sendFile(__dirname + '/facilities.html');
-});
-
-// Handle form submission
+// Route to handle form submission
 app.post('/bookFacility', (req, res) => {
     const { facility, date } = req.body;
 
-    // Insert data into MySQL
-    const query = 'INSERT INTO bookings (facility, date) VALUES (?, ?)';
-    connection.query(query, [facility, date], (err, results) => {
+    const sql = 'INSERT INTO facilities (facility, date) VALUES (?, ?)';
+    connection.query(sql, [facility, date], (err, result) => {
         if (err) {
-            console.error('Error inserting data into MySQL:', err);
-            res.status(500).send('Error inserting data into MySQL.');
+            console.error('Error inserting data into database: ' + err.stack);
+            res.status(500).send('Error inserting data into database');
             return;
         }
-        console.log('Data inserted into MySQL:', results);
-        res.send('Facility booked successfully!');
+
+        console.log('Data inserted into database successfully');
+        res.status(200).send('Data inserted into database successfully');
     });
 });
 
-// Start server
+// Start the server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
