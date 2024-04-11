@@ -18,11 +18,11 @@ app.use(express.static(path.join(__dirname, 'src')));
 app.use('/scripts', express.static(path.join(__dirname, 'src', 'scripts')));
 app.use('/pages', express.static(path.join(__dirname, 'src', 'pages')));
 
-// Route to check availability
-app.post('/checkAvailability', (req, res) => {
-    const { facility, date } = req.body;
 
-    // Query to check if the facility is available on the given date
+// Route to check availability
+app.get('/checkAvailability', (req, res) => {
+    const { facility, date } = req.query;
+
     const sql = 'SELECT * FROM facilities WHERE facility = ? AND date = ?';
     connection.query(sql, [facility, date], (err, results) => {
         if (err) {
@@ -30,13 +30,10 @@ app.post('/checkAvailability', (req, res) => {
             res.status(500).json({ message: 'Error checking availability' });
             return;
         }
-
-        // If results array is empty, the slot is available
-        if (results.length === 0) {
-            res.json({ message: 'Slot is available' });
-        } else {
-            // Slot is already booked
+        if (results.length > 0) {
             res.json({ message: 'Slot is already booked' });
+        } else {
+            res.json({ message: 'Slot is available' });
         }
     });
 });

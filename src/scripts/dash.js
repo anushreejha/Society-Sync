@@ -8,9 +8,8 @@ $(document).ready(function() {
         // Check availability
         $.ajax({
             url: '/checkAvailability',
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ facility: selectedFacility, date: selectedDate }),
+            method: 'GET', // Change method to GET
+            data: { facility: selectedFacility, date: selectedDate }, // Pass data as query parameters
             success: function(response) {
                 $('#availability-message').text(response.message);
             },
