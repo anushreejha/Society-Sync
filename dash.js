@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const connection = mysql.createConnection({
         host: 'localhost',
-        user: 'your_mysql_username',
-        password: 'your_mysql_password',
+        user: 'admin',
+        password: 'root',
         database: 'housing_management'
     });
 
