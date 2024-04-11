@@ -1,8 +1,13 @@
 const express = require('express');
 const mysql = require('mysql2');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
+
+app.get('/', (req, res) => {
+    res.send('Welcome to the Facilities Booking System');
+});
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -13,11 +18,11 @@ const connection = mysql.createConnection({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'src')));
 app.use('/scripts', express.static(path.join(__dirname, 'src', 'scripts')));
 app.use('/pages', express.static(path.join(__dirname, 'src', 'pages')));
-
 
 // Route to check availability
 app.get('/checkAvailability', (req, res) => {
