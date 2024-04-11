@@ -1,9 +1,9 @@
 const express = require('express');
 const mysql = require('mysql2');
+const path = require('path');
 
 const app = express();
 
-// MySQL connection configuration
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'admin',
@@ -11,11 +11,11 @@ const connection = mysql.createConnection({
     database: 'housing_management'
 });
 
-// Middleware to parse JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Route to handle form submission
+app.use(express.static(path.join(__dirname, 'src')));
+
 app.post('/bookFacility', (req, res) => {
     const { facility, date } = req.body;
 
@@ -32,7 +32,6 @@ app.post('/bookFacility', (req, res) => {
     });
 });
 
-// Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
