@@ -7,9 +7,9 @@ $(document).ready(function() {
 
         // Check availability
         $.ajax({
-            url: '/checkAvailability',
-            method: 'GET', // Change method to GET
-            data: { facility: selectedFacility, date: selectedDate }, // Pass data as query parameters
+            url: 'http://localhost:3000/checkAvailability', // Update the URL to match your server endpoint
+            method: 'GET',
+            data: { facility: selectedFacility, date: selectedDate },
             success: function(response) {
                 $('#availability-message').text(response.message);
             },
@@ -17,5 +17,6 @@ $(document).ready(function() {
                 console.error('Error checking availability:', error);
             }
         });
+        
     });
 });
