@@ -13,7 +13,7 @@
         <nav class="navbar"> <a href="#" class="homeowner-name">Homeowner Name</a>
             <ul>
                 <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Events</a></li>
+                <li><a href="events.html">Events</a></li>
                 <li><a href="facilities.html">Facility Booking</a></li>
             </ul>
         </nav>
@@ -29,7 +29,7 @@
                     <p>{{ description }}</p>
                 </template>
                 <div id="event-list"></div>
-                <a href="#">View All Events</a>
+                <a href="events.html" class="events-button">View All Events</a> 
                 <div class="mini-card-container">
                     <h2>Upcoming Bookings</h2>
                     <template id="bookedEventTemplate">
@@ -40,11 +40,8 @@
             </div>
             <div class="card facility-booking">
                 <h2>Facility Booking</h2>
-                <template id="bookedTemplate">
-                    <p>Facility booked: {{ facility }} on {{ date }}</p>
-                </template>
-                <p id="booked-facilities"></p>
-                <a href="facilities.html" class="book-button">Book</a>
+                <div id="facilities-list"></div>
+                <a href="facilities.html" class="book-button">Book</a> 
             </div>
             <div class="card circulars">
                 <h2>Circulars</h2>
@@ -60,57 +57,7 @@
             </div>
         </div>
 
-        <script>
-            // Replace with actual data from your system (array of events objects)
-            const events = [
-                { title: "Movie Night by the Pool", date: "Friday, April 26th, 7:00 PM", description: "Bring your blankets and snacks for a fun night under the stars!" },
-                // Add more events here
-            ];
-
-            const bookedFacilities = { // Replace with actual data from your system
-                facility: "Swimming Pool",
-                date: "Saturday, April 20th, 2:00 PM - 4:00 PM"
-            };
-
-            const bookedTemplate = document.getElementById('bookedTemplate');
-            const bookedFacilitiesElement = document.getElementById('booked-facilities');
-            const eventListElement = document.getElementById('event-list');
-            const bookedEventsElement = document.getElementById('booked-events');
-
-            if (bookedFacilities) {
-                const clone = bookedTemplate.content.cloneNode(true);
-                clone.querySelector('p').textContent = `Facility booked: ${bookedFacilities.facility} on ${bookedFacilities.date}`;
-                bookedFacilitiesElement.appendChild(clone);
-            } else {
-                bookedFacilitiesElement.textContent = 'No facilities booked';
-            }
-            function populateEvents() {
-                events.forEach(event => {
-                    const eventClone = document.getElementById('eventTemplate').content.cloneNode(true);
-                    eventClone.querySelector('h3').textContent = event.title;
-                    eventClone.querySelector('p:nth-of-type(2)').textContent = event.date;
-                    eventClone.querySelector('p:nth-of-type(3)').textContent = event.description;
-                    eventListElement.appendChild(eventClone);
-
-                    // Check for upcoming bookings within the event
-                    if (event.bookings) { 
-                        const bookingContainer = document.createElement('div');
-                        bookingContainer.classList.add('mini-card');
-                        bookingContainer.innerHTML = `<h2>Upcoming Bookings</h2>`;
-                        event.bookings.forEach(booking => { 
-                            const bookedEventClone = document.getElementById('bookedEventTemplate').content.cloneNode(true);
-                            bookedEventClone.querySelector('p').textContent = `${booking.title} - ${booking.date}`;
-                            bookingContainer.appendChild(bookedEventClone);
-                        });
-
-                        eventClone.querySelector('.mini-card-container').appendChild(bookingContainer);
-                    }
-                });
-            }
-                    populateEvents();
-                
-                    // Add click handler to show
-            </script>
+        <script src="dash.js"></script>
     </body>
 
 </html>
