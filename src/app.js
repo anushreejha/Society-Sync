@@ -35,7 +35,6 @@ app.post('/bookFacility', (req, res) => {
 });
 
 app.get('/facilities', (req, res) => {
-    // Fetch facilities from the database and send them as a response
     const sql = 'SELECT * FROM facilities';
     connection.query(sql, (err, results) => {
         if (err) {
