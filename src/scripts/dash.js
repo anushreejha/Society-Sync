@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     function populateFacilities() {
-        fetch('/pages/facilities') 
+        fetch('/bookFacility') 
             .then(response => response.json())
             .then(facilities => {
                 const facilitiesListElement = document.getElementById('facilities-list');

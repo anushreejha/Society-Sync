@@ -15,6 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'src')));
+app.use('/scripts', express.static(path.join(__dirname, 'src', 'scripts')));
+app.use('/pages', express.static(path.join(__dirname, 'src', 'pages')));
 
 app.post('/bookFacility', (req, res) => {
     const { facility, date } = req.body;
@@ -29,6 +31,20 @@ app.post('/bookFacility', (req, res) => {
 
         console.log('Data inserted into database successfully');
         res.status(200).send('Data inserted into database successfully');
+    });
+});
+
+app.get('/facilities', (req, res) => {
+    // Fetch facilities from the database and send them as a response
+    const sql = 'SELECT * FROM facilities';
+    connection.query(sql, (err, results) => {
+        if (err) {
+            console.error('Error fetching facilities from database: ' + err.stack);
+            res.status(500).send('Error fetching facilities from database');
+            return;
+        }
+
+        res.json(results);
     });
 });
 
