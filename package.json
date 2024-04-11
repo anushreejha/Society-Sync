@@ -11,6 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
+<<<<<<< HEAD
+=======
+    "mysql": "^2.18.1",
+>>>>>>> f4baf1b9c94f914cab1843f69fce5a66872bc45c
     "mysql2": "^3.9.4"
   }
 }
