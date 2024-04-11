@@ -1,19 +1,22 @@
-document.addEventListener("DOMContentLoaded", function() {
-    function populateFacilities() {
-        fetch('/bookFacility') 
-            .then(response => response.json())
-            .then(facilities => {
-                const facilitiesListElement = document.getElementById('facilities-list');
-                facilitiesListElement.innerHTML = ''; 
+$(document).ready(function() {
+    $('#facility-form').submit(function(event) {
+        event.preventDefault(); 
 
-                facilities.forEach(facility => {
-                    const facilityElement = document.createElement('div');
-                    facilityElement.textContent = `Facility booked: ${facility.facility} on ${facility.date}`;
-                    facilitiesListElement.appendChild(facilityElement);
-                });
-            })
-            .catch(error => console.error('Error fetching facilities:', error));
-    }
+        const selectedFacility = $('#facility').val();
+        const selectedDate = $('#date').val();
 
-    populateFacilities();
+        // Check availability
+        $.ajax({
+            url: '/checkAvailability',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ facility: selectedFacility, date: selectedDate }),
+            success: function(response) {
+                $('#availability-message').text(response.message);
+            },
+            error: function(error) {
+                console.error('Error checking availability:', error);
+            }
+        });
+    });
 });

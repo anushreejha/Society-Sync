@@ -7,30 +7,25 @@
 </head>
 <body>
     <h1>Facilities Booking</h1>
-    <form action="/bookFacility" method="POST">
+    <form id="facility-form">
         <label for="facility">Facility:</label>
-        <input type="text" id="facility" name="facility" required><br><br>
+        <select id="facility" name="facility" required>
+            <option value="" disabled selected>Select Option</option>
+            <option value="Swimming Pool">Swimming Pool</option>
+            <option value="Gym">Gym</option>
+            <option value="Tennis Court">Tennis Court</option>
+            <option value="Party Hall">Party Hall</option>
+            <option value="Badminton Court">Badminton Court</option>
+            <option value="Main Lawn">Main Lawn</option>
+            <option value="Food Court">Food Court</option>
+        </select>        
         <label for="date">Date:</label>
         <input type="date" id="date" name="date" required><br><br>
-        <button type="submit">Book Facility</button>
+        <button type="submit">Check Availability</button>
     </form>
+    <p id="availability-message"></p>
 
-    <div id="facilities-list"></div>
-
-    <script>
-        fetch('/facilities') 
-            .then(response => response.json())
-            .then(facilities => {
-                const facilitiesListElement = document.getElementById('facilities-list');
-                facilitiesListElement.innerHTML = ''; 
-
-                facilities.forEach(facility => {
-                    const facilityElement = document.createElement('div');
-                    facilityElement.textContent = `Facility booked: ${facility.facility} on ${facility.date}`;
-                    facilitiesListElement.appendChild(facilityElement);
-                });
-            })
-            .catch(error => console.error('Error fetching facilities:', error));
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../scripts/dash.js"></script>
 </body>
 </html>

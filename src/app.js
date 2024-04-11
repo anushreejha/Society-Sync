@@ -18,32 +18,26 @@ app.use(express.static(path.join(__dirname, 'src')));
 app.use('/scripts', express.static(path.join(__dirname, 'src', 'scripts')));
 app.use('/pages', express.static(path.join(__dirname, 'src', 'pages')));
 
-app.post('/bookFacility', (req, res) => {
+// Route to check availability
+app.post('/checkAvailability', (req, res) => {
     const { facility, date } = req.body;
 
-    const sql = 'INSERT INTO facilities (facility, date) VALUES (?, ?)';
-    connection.query(sql, [facility, date], (err, result) => {
+    // Query to check if the facility is available on the given date
+    const sql = 'SELECT * FROM facilities WHERE facility = ? AND date = ?';
+    connection.query(sql, [facility, date], (err, results) => {
         if (err) {
-            console.error('Error inserting data into database: ' + err.stack);
-            res.status(500).send('Error inserting data into database');
+            console.error('Error checking availability:', err);
+            res.status(500).json({ message: 'Error checking availability' });
             return;
         }
 
-        console.log('Data inserted into database successfully');
-        res.status(200).send('Data inserted into database successfully');
-    });
-});
-
-app.get('/facilities', (req, res) => {
-    const sql = 'SELECT * FROM facilities';
-    connection.query(sql, (err, results) => {
-        if (err) {
-            console.error('Error fetching facilities from database: ' + err.stack);
-            res.status(500).send('Error fetching facilities from database');
-            return;
+        // If results array is empty, the slot is available
+        if (results.length === 0) {
+            res.json({ message: 'Slot is available' });
+        } else {
+            // Slot is already booked
+            res.json({ message: 'Slot is already booked' });
         }
-
-        res.json(results);
     });
 });
 
