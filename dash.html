@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housing Management Dashboard</title>
+    <link rel="stylesheet" href="dash.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar"> <a href="#" class="homeowner-name">Homeowner Name</a>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="facilities.html">Facility Booking</a></li>
+            </ul>
+        </nav>
+
+        <h1>Housing Management Dashboard</h1>
+
+        <div class="grid-container">
+            <div class="card events">
+                <h2>Events</h2>
+                <template id="eventTemplate">
+                    <h3>{{ title }}</h3>
+                    <p>{{ date }}</p>
+                    <p>{{ description }}</p>
+                </template>
+                <div id="event-list"></div>
+                <a href="events.html" class="events-button">View All Events</a> 
+                <div class="mini-card-container">
+                    <h2>Upcoming Bookings</h2>
+                    <template id="bookedEventTemplate">
+                        <p>**{{ title }}** - {{ date }}</p>
+                    </template>
+                    <div id="booked-events"></div>
+                </div>
+            </div>
+            <div class="card facility-booking">
+                <h2>Facility Booking</h2>
+                <div id="facilities-list"></div>
+                <a href="facilities.html" class="book-button">Book</a> 
+            </div>
+            <div class="card circulars">
+                <h2>Circulars</h2>
+                <p>No new circulars</p>
+            </div>
+            <div class="card noticeboard">
+                <h2>Noticeboard</h2>
+                <div class="notice">
+                    <h3>Water Maintenance (April 15th)</h3>
+                    <p>There will be a scheduled water maintenance on April 15th from 9:00 AM to 5:00 PM. During this
+                        time, there will be no water supply in the apartments.</p>
+                </div>
+            </div>
+        </div>
+
+        <script src="dash.js"></script>
+    </body>
+
+</html>
