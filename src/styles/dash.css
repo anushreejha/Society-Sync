@@ -31,7 +31,7 @@ h1 {
 .book-button {
   display: block;
   margin-top: 10px;
-  background-color: #4CAF50;
+  background-color: #0056b3;
   color: white;
   text-align: center;
   padding: 10px 20px;
@@ -106,7 +106,7 @@ h1 {
 .events-button {
   display: block;
   margin-top: 10px;
-  background-color: #4CAF50;
+  background-color: #0056b3;
   color: white;
   text-align: center;
   padding: 12px 24px; 
@@ -118,5 +118,5 @@ h1 {
 }
 
 .events-button:hover {
-  background-color: #45a049;
+  background-color: #0056b3;
 }
