@@ -1,22 +1,51 @@
 $(document).ready(function() {
+    // Event form submission
+    $('#event-form').submit(function(event) {
+        event.preventDefault();
+
+        const eventData = {
+            title: $('#title').val(),
+            date: $('#date').val(),
+            description: $('#description').val()
+        };
+
+        // Add new event
+        $.ajax({
+            url: 'http://localhost:3000/addEvent',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(eventData),
+            success: function(response) {
+                alert('Event added successfully!');
+                // Optionally, clear the form fields after adding the event
+                $('#title').val('');
+                $('#date').val('');
+                $('#description').val('');
+            },
+            error: function(error) {
+                console.error('Error adding event:', error);
+            }
+        });
+    });
+
+    // Facility form submission
     $('#facility-form').submit(function(event) {
-        event.preventDefault(); 
+        event.preventDefault();
 
         const selectedFacility = $('#facility').val();
         const selectedDate = $('#date').val();
 
-        // Check availability
+        // Check availability for facilities
         $.ajax({
-            url: 'http://localhost:3000/checkAvailability', // Update the URL to match your server endpoint
+            url: 'http://localhost:3000/checkAvailability',
             method: 'GET',
             data: { facility: selectedFacility, date: selectedDate },
             success: function(response) {
                 $('#availability-message').text(response.message);
             },
             error: function(error) {
-                console.error('Error checking availability:', error);
+                console.error('Error checking availability for facilities:', error);
             }
         });
-        
     });
 });

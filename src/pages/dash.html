@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Housing Management Dashboard</title>
     <link rel="stylesheet" href="../styles/dash.css">
 </head>
-
 <body>
     <header>
-        <nav class="navbar"> <a href="#" class="homeowner-name">Homeowner Name</a>
+        <nav class="navbar">
+            <a href="#" class="homeowner-name">Homeowner Name</a>
             <ul>
                 <li><a href="#">Dashboard</a></li>
                 <li><a href="events.html">Events</a></li>
@@ -29,19 +28,12 @@
                     <p>{{ description }}</p>
                 </template>
                 <div id="event-list"></div>
-                <a href="events.html" class="events-button">View All Events</a> 
-                <div class="mini-card-container">
-                    <h2>Upcoming Bookings</h2>
-                    <template id="bookedEventTemplate">
-                        <p>**{{ title }}** - {{ date }}</p>
-                    </template>
-                    <div id="booked-events"></div>
-                </div>
+                <a href="events.html" class="events-button">View All Events</a>
             </div>
             <div class="card facility-booking">
                 <h2>Facility Booking</h2>
                 <div id="facilities-list"></div>
-                <a href="facilities.html" class="book-button">Book</a> 
+                <a href="facilities.html" class="book-button">Book</a>
             </div>
             <div class="card circulars">
                 <h2>Circulars</h2>
@@ -57,7 +49,8 @@
             </div>
         </div>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="dash.js"></script>
-    </body>
-
+    </header>
+</body>
 </html>

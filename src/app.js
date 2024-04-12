@@ -24,22 +24,36 @@ app.use(express.static(path.join(__dirname, 'src')));
 app.use('/scripts', express.static(path.join(__dirname, 'src', 'scripts')));
 app.use('/pages', express.static(path.join(__dirname, 'src', 'pages')));
 
-// Route to check availability
+// Route to check availability for facilities
 app.get('/checkAvailability', (req, res) => {
     const { facility, date } = req.query;
 
     const sql = 'SELECT * FROM facilities WHERE facility = ? AND date = ?';
     connection.query(sql, [facility, date], (err, results) => {
         if (err) {
-            console.error('Error checking availability:', err);
-            res.status(500).json({ message: 'Error checking availability' });
+            console.error('Error checking availability for facilities:', err);
+            res.status(500).json({ message: 'Error checking availability for facilities' });
             return;
         }
         if (results.length > 0) {
-            res.json({ message: 'Slot is already booked' });
+            res.json({ message: 'Slot is already booked for facilities' });
         } else {
-            res.json({ message: 'Slot is available' });
+            res.json({ message: 'Slot is available for facilities' });
         }
+    });
+});
+
+// Route to add new event
+app.post('/addEvent', (req, res) => {
+    const eventData = req.body;
+    const sql = 'INSERT INTO events (title, date, description) VALUES (?, ?, ?)';
+    connection.query(sql, [eventData.title, eventData.date, eventData.description], (err, results) => {
+        if (err) {
+            console.error('Error adding event:', err);
+            res.status(500).json({ message: 'Error adding event' });
+            return;
+        }
+        res.json({ message: 'Event added successfully' });
     });
 });
 
