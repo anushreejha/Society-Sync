@@ -1,26 +1,23 @@
 /* facilities.css */
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
-}
-
+/* Container Styles */
 .container {
     max-width: 500px;
     margin: 50px auto;
-    background-color: #fff;
+    background-color: #f8f9fa;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Heading Styles */
 h1 {
     text-align: center;
     color: #333;
+    margin-bottom: 20px;
 }
 
+/* Form Styles */
 .form-group {
     margin-bottom: 20px;
 }
@@ -32,7 +29,8 @@ label {
     font-weight: bold;
 }
 
-select, input[type="date"] {
+select,
+input[type="date"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ced4da;
@@ -56,6 +54,7 @@ button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
+/* Availability Message Styles */
 #availability-message {
     margin-top: 20px;
     text-align: center;
