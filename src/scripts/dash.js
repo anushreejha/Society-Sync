@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    // Event form submission
     $('#event-form').submit(function(event) {
         event.preventDefault();
 
@@ -8,8 +7,7 @@ $(document).ready(function() {
             date: $('#date').val(),
             description: $('#description').val()
         };
-
-        // Add new event
+    
         $.ajax({
             url: 'http://localhost:3000/addEvent',
             method: 'POST',
@@ -17,7 +15,6 @@ $(document).ready(function() {
             data: JSON.stringify(eventData),
             success: function(response) {
                 alert('Event added successfully!');
-                // Optionally, clear the form fields after adding the event
                 $('#title').val('');
                 $('#date').val('');
                 $('#description').val('');
@@ -28,14 +25,12 @@ $(document).ready(function() {
         });
     });
 
-    // Facility form submission
     $('#facility-form').submit(function(event) {
         event.preventDefault();
 
         const selectedFacility = $('#facility').val();
         const selectedDate = $('#date').val();
 
-        // Check availability for facilities
         $.ajax({
             url: 'http://localhost:3000/checkAvailability',
             method: 'GET',

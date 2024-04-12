@@ -24,7 +24,6 @@ app.use(express.static(path.join(__dirname, 'src')));
 app.use('/scripts', express.static(path.join(__dirname, 'src', 'scripts')));
 app.use('/pages', express.static(path.join(__dirname, 'src', 'pages')));
 
-// Route to check availability for facilities
 app.get('/checkAvailability', (req, res) => {
     const { facility, date } = req.query;
 
@@ -43,7 +42,6 @@ app.get('/checkAvailability', (req, res) => {
     });
 });
 
-// Route to add new event
 app.post('/addEvent', (req, res) => {
     const eventData = req.body;
     const sql = 'INSERT INTO events (title, date, description) VALUES (?, ?, ?)';

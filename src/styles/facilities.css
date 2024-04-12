@@ -1,6 +1,3 @@
-/* facilities.css */
-
-/* Container Styles */
 .container {
     max-width: 500px;
     margin: 50px auto;
@@ -10,14 +7,12 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Heading Styles */
 h1 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
 }
 
-/* Form Styles */
 .form-group {
     margin-bottom: 20px;
 }
@@ -54,7 +49,6 @@ button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-/* Availability Message Styles */
 #availability-message {
     margin-top: 20px;
     text-align: center;
