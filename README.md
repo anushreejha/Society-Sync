@@ -17,3 +17,5 @@ Society Sync is a comprehensive platform designed to streamline the management o
 - **Document Repository**: Centralize important documents like society bylaws, meeting minutes, and notices.
   
 - **Event Management**: Coordinate and promote community events, RSVPs, and participation.
+
+<p>Some of the features are still work in progress.</p>
